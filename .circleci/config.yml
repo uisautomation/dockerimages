@@ -1,0 +1,71 @@
+version: 2
+jobs:
+  build_and_push: &build_and_push
+    docker:
+      - image: docker:git
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      - run:
+          name: Build image
+          command: |
+            apk update
+            apk add gettext  # for envsubst command
+            envsubst < "./${IMAGE_TYPE}/Dockerfile" | \
+              docker build -t "${IMAGE_TYPE}" -f - "${IMAGE_TYPE}"
+
+      - run:
+          name: Push images
+          command: |
+            only_on_branch=master
+            if [ "${CIRCLE_BRANCH}" == "${only_on_branch}" ]; then
+              if [ ! -z "${DOCKER_USER}" ] && [ ! -z "${DOCKER_PASS}" ]; then
+                echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
+                for tag in ${TAGS}; do
+                  IMAGE_TAG=${CIRCLE_PROJECT_USERNAME}/${IMAGE_TYPE}:${tag}
+                  echo "Tagging image ${IMAGE_TAG}"
+                  docker tag "${IMAGE_TYPE}" "${IMAGE_TAG}"
+                  docker push "${IMAGE_TAG}"
+                done
+              else
+                echo "Not pushing: no DOCKER_USER and DOCKER_PASS variables."
+              fi
+            else
+              echo "Not pushing: branch '${CIRCLE_BRANCH}' is not '${only_on_branch}'."
+            fi
+
+  python-3.6:
+    <<: *build_and_push
+    environment:
+      - IMAGE_TYPE=python
+      - TAGS=3.6-alpine alpine latest
+      - PYTHON_VERSION=3.6
+      - REQUIREMENTS=base
+  python-3.6-django:
+    <<: *build_and_push
+    environment:
+      - IMAGE_TYPE=python
+      - TAGS=3.6-django-alpine django django-alpine
+      - PYTHON_VERSION=3.6
+      - REQUIREMENTS=django
+
+workflows:
+  version: 2
+
+  # A workflow which happens on each commit
+  build_and_push: &build_and_push_workflow
+    jobs:
+      - python-3.6
+      - python-3.6-django
+
+  # The build_and_push flow but run nightly
+  nightly:
+    <<: *build_and_push_workflow
+    triggers:
+      - schedule:
+          cron: "13 3 * * *"
+          filters:
+            branches:
+              only:
+                - master

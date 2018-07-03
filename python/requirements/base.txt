@@ -1,0 +1,8 @@
+# Python packages which are common to most UIS Automation Python projects
+psycopg2-binary
+
+# Python packages which are common dependencies but which take a long time to
+# build
+cffi
+cryptography
+lxml

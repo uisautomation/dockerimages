@@ -1,0 +1,6 @@
+-r base.txt
+django
+git+https://github.com/uisautomation/django-automationcommon/
+git+https://github.com/uisautomation/django-automationoauth/
+django-ucamlookup
+django-ucamwebauth

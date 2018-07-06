@@ -5,7 +5,8 @@ ADD ./requirements/ /tmp/requirements/
 
 # Update and upgrade system packages and install common Python modules
 RUN apk --no-cache upgrade && \
-	apk --no-cache add git vim postgresql-dev libffi-dev gcc musl-dev \
-	libxml2-dev libxslt-dev && \
+	apk --no-cache add git vim \
+		postgresql-dev libffi-dev gcc musl-dev libxml2-dev libxslt-dev && \
 	pip install --no-cache-dir --upgrade pip && \
-	pip install --no-cache-dir --upgrade --no-cache -r /tmp/requirements/$REQUIREMENTS.txt
+	pip install --no-cache-dir --upgrade --no-cache -r /tmp/requirements/$REQUIREMENTS.txt && \
+	apk del postgresql-dev libffi-dev gcc musl-dev libxml2-dev libxslt-dev

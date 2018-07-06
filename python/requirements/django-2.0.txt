@@ -1,5 +1,5 @@
 -r base.txt
-django
+django<2.1
 git+https://github.com/uisautomation/django-automationcommon/
 git+https://github.com/uisautomation/django-automationoauth/
 django-ucamlookup

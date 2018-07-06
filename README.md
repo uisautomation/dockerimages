@@ -12,6 +12,7 @@ The following image types are built. See the README files in each image's
 directory for more details.
 
 * [python](python/README.md)
+* [django](python/README.md)
 
 ## Configuration
 

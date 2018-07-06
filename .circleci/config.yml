@@ -23,7 +23,7 @@ jobs:
               if [ ! -z "${DOCKER_USER}" ] && [ ! -z "${DOCKER_PASS}" ]; then
                 echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
                 for tag in ${TAGS}; do
-                  IMAGE_TAG=${CIRCLE_PROJECT_USERNAME}/${IMAGE_TYPE}:${tag}
+                  IMAGE_TAG=${CIRCLE_PROJECT_USERNAME}/${IMAGE_NAME}:${tag}
                   echo "Tagging image ${IMAGE_TAG}"
                   docker tag "${IMAGE_TYPE}" "${IMAGE_TAG}"
                   docker push "${IMAGE_TAG}"
@@ -35,20 +35,22 @@ jobs:
               echo "Not pushing: branch '${CIRCLE_BRANCH}' is not '${only_on_branch}'."
             fi
 
-  python-3.6:
+  python-3.6-alpine:
     <<: *build_and_push
     environment:
       - IMAGE_TYPE=python
+      - IMAGE_NAME=python
       - TAGS=3.6-alpine alpine latest
       - PYTHON_VERSION=3.6
       - REQUIREMENTS=base
-  python-3.6-django:
+  django-2.0-python-3.6-alpine:
     <<: *build_and_push
     environment:
       - IMAGE_TYPE=python
-      - TAGS=3.6-django-alpine django django-alpine
+      - IMAGE_NAME=django
+      - TAGS=2.0 2.0-py3.6 2.0-py3.6-alpine 2.0-alpine latest
       - PYTHON_VERSION=3.6
-      - REQUIREMENTS=django
+      - REQUIREMENTS=django-2.0
 
 workflows:
   version: 2
@@ -56,8 +58,8 @@ workflows:
   # A workflow which happens on each commit
   build_and_push: &build_and_push_workflow
     jobs:
-      - python-3.6
-      - python-3.6-django
+      - python-3.6-alpine
+      - django-2.0-python-3.6-alpine
 
   # The build_and_push flow but run nightly
   nightly:

@@ -4,8 +4,8 @@ FROM python:$PYTHON_VERSION-alpine
 ADD ./requirements/ /tmp/requirements/
 
 # Update and upgrade system packages and install common Python modules
-RUN apk update && apk upgrade && \
-	apk add git vim postgresql-dev libffi-dev gcc musl-dev \
+RUN apk --no-cache upgrade && \
+	apk --no-cache add git vim postgresql-dev libffi-dev gcc musl-dev \
 	libxml2-dev libxslt-dev && \
-	pip install --upgrade pip && \
-	pip install --upgrade --no-cache -r /tmp/requirements/$REQUIREMENTS.txt
+	pip install --no-cache-dir --upgrade pip && \
+	pip install --no-cache-dir --upgrade --no-cache -r /tmp/requirements/$REQUIREMENTS.txt

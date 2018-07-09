@@ -10,7 +10,7 @@ of our products.
 
 * ``python`` is a base Python image. Tags: ``3.6-alpine``, ``alpine``, ``latest``
 * ``django`` is an image with Django and common applications installed. Tags:
-  ``2.0``, ``2.0-py3.6``, ``2.0-py32-alpine``, ``2.0-alpine``, ``alpine``,
+  ``2.0``, ``2.0-py3.6``, ``2.0-py3.6-alpine``, ``2.0-alpine``, ``alpine``,
   ``latest``
 
 ## Usage

@@ -4,3 +4,6 @@ git+https://github.com/uisautomation/django-automationcommon/
 git+https://github.com/uisautomation/django-automationoauth/
 django-ucamlookup
 django-ucamwebauth
+gunicorn
+whitenoise
+brotlipy  # Support faster compression in whitenoise

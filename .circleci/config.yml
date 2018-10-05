@@ -92,6 +92,14 @@ jobs:
       - TAGS=2.6
       - ANSIBLE_VERSION=2.6
 
+  ansible-2.7:
+    <<: *build_and_push
+    environment:
+      - IMAGE_TYPE=ansible-playbook
+      - IMAGE_NAME=ansible-playbook
+      - TAGS=2.7
+      - ANSIBLE_VERSION=2.7
+
 workflows:
   version: 2
 
@@ -105,6 +113,7 @@ workflows:
       - django-2.0-python-3.7-alpine
       - django-2.1-python-3.7-alpine
       - ansible-2.6
+      - ansible-2.7
 
   # The build_and_push flow but run nightly
   nightly:

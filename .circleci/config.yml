@@ -90,7 +90,7 @@ jobs:
       - IMAGE_TYPE=ansible-playbook
       - IMAGE_NAME=ansible-playbook
       - TAGS=2.6
-      - ANSIBLE_VERSION=2.6
+      - ANSIBLE_VERSION=2.6.0
 
   ansible-2.7:
     <<: *build_and_push
@@ -98,7 +98,7 @@ jobs:
       - IMAGE_TYPE=ansible-playbook
       - IMAGE_NAME=ansible-playbook
       - TAGS=2.7
-      - ANSIBLE_VERSION=2.7
+      - ANSIBLE_VERSION=2.7.0
 
 workflows:
   version: 2

@@ -13,6 +13,7 @@ directory for more details.
 
 * [python](python/README.md)
 * [django](python/README.md)
+* [ucam-webauth-proxy](ucam-webauth-proxy/README.md)
 
 ## Configuration
 

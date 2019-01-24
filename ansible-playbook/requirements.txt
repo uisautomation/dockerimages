@@ -1,0 +1,7 @@
+# The openstack SDK is an enabler for all the OpenStack modules at
+# https://docs.ansible.com/ansible/latest/modules/list_of_cloud_modules.html#openstack
+openstacksdk
+
+# The netaddr module is neded to use the ipaddr jinja filter as used in the docker swarm
+# playbook when creating custom networks
+netaddr

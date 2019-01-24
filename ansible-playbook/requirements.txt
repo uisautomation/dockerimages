@@ -1,2 +1,4 @@
+# Additional modules required to support provisioning OpenStack resources via
+# Ansible.
 openstacksdk
 netaddr

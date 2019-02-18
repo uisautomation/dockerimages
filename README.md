@@ -1,5 +1,8 @@
 # Automation docker images
 
+> **This repository is now hosted on the Cambridge
+> [Developers Hub](https://gitlab.developers.cam.ac.uk/uis/devops/infra/dockerimages/).
+
 [![CircleCI](https://circleci.com/gh/uisautomation/dockerimages.svg?style=svg)](https://circleci.com/gh/uisautomation/dockerimages)
 
 This repository contains configuration to build the [UIS automation docker

@@ -123,13 +123,13 @@ workflows:
       - ansible-2.7
       - ucam-webauth-proxy
 
-  # The build_and_push flow but run nightly
-  nightly:
-    <<: *build_and_push_workflow
-    triggers:
-      - schedule:
-          cron: "13 3 * * *"
-          filters:
-            branches:
-              only:
-                - master
+#  # The build_and_push flow but run nightly
+#  nightly:
+#    <<: *build_and_push_workflow
+#    triggers:
+#      - schedule:
+#          cron: "13 3 * * *"
+#          filters:
+#            branches:
+#              only:
+#                - master
